@@ -22,7 +22,7 @@ curl -X POST -F "url=www.google.com/finance/how-to-save.html" http://127.0.0.1:5
 
 # Features
  - We're currently using the tinyurl api for shortening in the Pyshorteners library, but we could use any of the others,
-see https://github.com/ellisonleao/pyshorteners/blob/master/example.py
+see: https://tinyurl.com/yczh4373
  - Health Check for the microservice - nice-to-have, but this is needed on for e.g. AWS on microservice startup as an 
  automated check
  
