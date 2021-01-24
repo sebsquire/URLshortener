@@ -7,13 +7,13 @@ Required:
  - Visiting this URL redirects to original link
 
 Language: Python
+
 # To Setup
 ````bash
 pip install -r requirements.txt
 ````
 
 # To test (locally)
-
 Run the program main.py. This starts the flask server locally run this command in a prompt:
 ````bash
 curl http://127.0.0.1:5000/health-check
@@ -26,10 +26,14 @@ see https://github.com/ellisonleao/pyshorteners/blob/master/example.py
  - Health Check for the microservice - nice-to-have, but this is needed on for e.g. AWS on microservice startup as an 
  automated check
  
- # ways to improve this
-  - Create a database and convert rather than using an API (database? sqlite? how to interact with it encoding? - example?)
-  - Create a webpage to do this from (maybe use html - example?)
-  - Run on aws ec2 to make this accessible to everyone
-  - Spin up on docker to be sure same environment is deployed everywhere
-  - use fargate in IaC to auto scale based on demand
-  - add threading for if there's multiple requests at once?
+ # Ways to improve this (starting with easiest/most helpful)
+  - Flask is a development server and not meant for production. In production we should use a proper production WSGI,
+  such as waitress. See: https://tinyurl.com/yyfrzsbw
+  - Create a web page to allow users to access on their browser (e.g. in html)
+  - Add threading for if there's multiple requests at once  
+  - Run on aws ec2 to make this accessible when hosting on the local machine is not possible
+  - Spin up on docker to be sure same environment is deployed everywhere - for if this is deployed to prod servers
+  - use AWS Fargate in IaC to auto scale based on demand
+  - Create a database (e.g. sqlite) and do the heavy lifting of url shortening (create database ID record, encode that 
+  record to produce a shortened url) ourselves instead of using an external API. This is more coding but much safer as 
+  we don't rely on external services that can be stopped at any time. See: https://tinyurl.com/zl2vh3f
