@@ -7,21 +7,29 @@ Required:
  - Visiting this URL redirects to original link
 
 Language: Python
+# To Setup
+````bash
+pip install -r requirements.txt
+````
 
-# To test
+# To test (locally)
 
-For local testing add this code to the bottom of main.py:
+Run the program main.py. This starts the flask server locally run this command in a prompt:
+````bash
+curl http://127.0.0.1:5000/health-check
+curl -X POST -F "url=www.google.com/finance/how-to-save.html" http://127.0.0.1:5000/shorten
+````
 
-if __name__ == "__main__":
-    app.run()
-this starts the flask server locally run this command in a prompt:
-
-curl http://127.0.0.5000/healthCheck
-
-# todo:
- - flask app
- - curl command
- - requirements to run
- - URL shortener function to some string increasing number (how?)
- - function to redirect link to user's URL (how?)
- - add threading for if there's multiple requests at once?
+# Features
+ - We're currently using the tinyurl api for shortening in the Pyshorteners library, but we could use any of the others,
+see https://github.com/ellisonleao/pyshorteners/blob/master/example.py
+ - Health Check for the microservice - nice-to-have, but this is needed on for e.g. AWS on microservice startup as an 
+ automated check
+ 
+ # ways to improve this
+  - Create a database and convert rather than using an API (database? sqlite? how to interact with it encoding? - example?)
+  - Create a webpage to do this from (maybe use html - example?)
+  - Run on aws ec2 to make this accessible to everyone
+  - Spin up on docker to be sure same environment is deployed everywhere
+  - use fargate in IaC to auto scale based on demand
+  - add threading for if there's multiple requests at once?
